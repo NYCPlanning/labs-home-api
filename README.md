@@ -1,28 +1,25 @@
 # labs-api
-An express.js api that delivers project-related data from airtable for consumption in planninglabs.nyc
+An express.js api that delivers project-related data from airtable for consumption in ideas.planninglabs.nyc
 
-## Dependencies
+## Development Environment
 
-- MongoDB
-
-## Installation
-
-1. Install MongoDb
+1. Clone this repo & install dependencies
   ```
-  brew install mongodb
-  brew services start mongodb
+  git clone https://github.com/NYCPlanning/labs-ideas-api.git
+  npm install
   ```
 
 2. Copy .env example
   ```
   cp .env-example .env
   ```
-  Open the new `.env` file and add your secret keys. You can leave the `MONGO_URL` as it is.
+  Open the new `.env` file and add your airtable key.
 
 3. Start the server
   ```
   npm start
   ```
+  
 ## Routes
 
 - `/projects/pipeline.json` - gets projects who's status includes "Pipeline"
