@@ -1,4 +1,4 @@
-# labs-api
+# labs-ideas-api
 An express.js api that delivers project-related data from airtable for consumption in ideas.planninglabs.nyc
 
 ## Development Environment
