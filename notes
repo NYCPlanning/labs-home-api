@@ -1,0 +1,92 @@
+Count parks.  Needs to distinguish between parks/plazas and other things
+
+SELECT count(parks.gid) as number_parks_plazas FROM nybb LEFT JOIN parks ON ST_Intersects(nybb.geom, parks.geom) WHERE nybb.borocode = 1 GROUP BY nybb.borocode ORDER BY number_parks_plazas DESC
+
+categorytypes:
+
+"Undeveloped" no
+"Parkway" no
+"Historic House Park" yes
+"Jointly Operated Playground" yes
+"Playground"byes
+"Community Park" yes
+"Strip" no
+"Cemetery" no
+"Nature Area" yes
+"Lot" no
+"Neighborhood Park" yes
+"Flagship Park" yes
+"Mall" maybe/yes
+"Garden" no
+"Tracking" no
+"Triangle/Plaza" yes
+"Recreation Field/Courts" yes
+"Managed Sites" yes
+"Buildings/Institutions" no
+"Waterfront Facility" yes
+
+SELECT count(parks.gid) as number_parks_plazas FROM nybb LEFT JOIN parks ON ST_Intersects(nybb.geom, parks.geom) WHERE nybb.borocode = 1 AND parks.typecatego = ANY('{Historic House Park,Jointly Operated Playground,Playground,Community Park,Nature Area,Neighborhood Park,Flagship Park,Mall,Triangle/Plaza,Recreation Field/Courts,Managed Sites,Waterfront Facility}'::text[]) GROUP BY nybb.borocode ORDER BY number_parks_plazas DESC
+
+
+GeoJson for a community district:  
+
+
+
+SELECT count(parks.gid) as number_parks_plazas FROM parks WHERE ST_Intersects(ST_GeomFromGeoJSON('Count parks.  Needs to distinguish between parks/plazas and other things
+
+SELECT count(parks.gid) as number_parks_plazas FROM nybb LEFT JOIN parks ON ST_Intersects(nybb.geom, parks.geom) WHERE nybb.borocode = 1 GROUP BY nybb.borocode ORDER BY number_parks_plazas DESC
+
+categorytypes:
+
+"Undeveloped" no
+"Parkway" no
+"Historic House Park" yes
+"Jointly Operated Playground" yes
+"Playground"byes
+"Community Park" yes
+"Strip" no
+"Cemetery" no
+"Nature Area" yes
+"Lot" no
+"Neighborhood Park" yes
+"Flagship Park" yes
+"Mall" maybe/yes
+"Garden" no
+"Tracking" no
+"Triangle/Plaza" yes
+"Recreation Field/Courts" yes
+"Managed Sites" yes
+"Buildings/Institutions" no
+"Waterfront Facility" yes
+
+SELECT count(parks.gid) as number_parks_plazas FROM nybb LEFT JOIN parks ON ST_Intersects(nybb.geom, parks.geom) WHERE nybb.borocode = 1 AND parks.typecatego = ANY('{Historic House Park,Jointly Operated Playground,Playground,Community Park,Nature Area,Neighborhood Park,Flagship Park,Mall,Triangle/Plaza,Recreation Field/Courts,Managed Sites,Waterfront Facility}'::text[]) GROUP BY nybb.borocode ORDER BY number_parks_plazas DESC
+
+
+GeoJson for a community district:  
+
+SELECT count(parks.gid) as num_parks_plazas FROM parks WHERE ST_Intersects(ST_GeomFromGeoJSON('{ "type": "Polygon", "coordinates": [ [ [ -74.00768280029297, 40.721371974721045 ], [ -74.00768280029297, 40.75232871988624 ], [ -73.97420883178711, 40.75232871988624 ], [ -73.97420883178711, 40.721371974721045 ], [ -74.00768280029297, 40.721371974721045 ] ] ],"crs":{"type":"name","properties":{"name":"EPSG:4326"}} }'), parks.geom) AND parks.typecatego = ANY('{Historic House Park,Jointly Operated Playground,Playground,Community Park,Nature Area,Neighborhood Park,Flagship Park,Mall,Triangle/Plaza,Recreation Field/Courts,Managed Sites,Waterfront Facility}'::text[]) ORDER BY num_parks_plazas DESC
+
+
+"crs":{"type":"name","properties":{"name":"EPSG:4326"}}
+
+{ "type": "Polygon", "coordinates": [ [ [ -74.007, 40.721 ], [ -74.007, 40.752 ], [ -73.974, 40.752 ], [ -73.974, 40.721 ], [ -74.007, 40.721 ] ] ], "crs":{ "type":"name", "properties":{ "name":"EPSG:4326" } } }
+
+SELECT a.borocd, sum(b.pop2010) FROM nycd a LEFT JOIN pop_blocks2010 b ON ST_Intersects(a.geom, b.geom) GROUP BY a.gid
+
+shp2pgsql -s 2263:4326 Queenstree | psql -h localhost -U postgres -d postgres
+
+
+Types of API Calls:
+
+
+geo
+
+geo/places - get geojson for nyc geometries - cd, nta, boro, city
+  -one - good http://localhost:3000/api/geo/place/one/cd/101.geojson
+  -all - good http://localhost:3000/api/geo/place/all/cd.geojson
+geo/datasets - get geojson from data layers for mapping
+  - one good http://localhost:3000/api/geo/dataset/streettrees/cd/102.geojson
+
+metric - get json data for widgets
+http://localhost:3000/api/metric/parks_acres/cd/101.json
+
