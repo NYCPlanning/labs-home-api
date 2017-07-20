@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.get('/pipeline.json', (req, res) => {
   const url = `
-    https://api.airtable.com/v0/app1f3lv9mx7L5xnY/Labs Project Tracking?
-    &fields=['Project Name', 'Customer', 'Short Description']
-    &api_key=${process.env.AIRTABLE_API_KEY}
+    https://api.airtable.com/v0/app1f3lv9mx7L5xnY/Labs Project Tracking Staging?
+    maxRecords=3&
+    view=All Projects&api_key=${process.env.AIRTABLE_API_KEY}
   `;
 
   console.log(url);
