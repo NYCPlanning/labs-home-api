@@ -3,7 +3,7 @@ const request = require('request');
 
 const router = express.Router();
 
-router.get('/pipeline.json', (req, res) => {
+router.get('/', (req, res) => {
   const url = `
     https://api.airtable.com/v0/app1f3lv9mx7L5xnY/Labs Project Tracking Staging?
     maxRecords=3&
