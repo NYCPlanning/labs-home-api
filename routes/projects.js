@@ -1,6 +1,7 @@
 const express = require('express');
 const request = require('request');
 const querystring = require('querystring');
+const slug = require('slug');
 
 const router = express.Router();
 
@@ -15,6 +16,12 @@ router.get('/', (req, res) => {
 
   request({ url, json: true }, (err, response, body) => {
     const newArray = body.records.map(obj => obj.fields);
+
+    newArray.forEach((project) => {
+      const d = project;
+      d.slug = slug(d.project_name, { lower: true });
+    });
+
     res.send(newArray);
   });
 });
