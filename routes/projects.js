@@ -9,7 +9,6 @@ const whitelisted_fields =
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  console.log(process.env.WHITELISTED_FIELDS);
   const fields = querystring.stringify({fields: whitelisted_fields});
   const url = `
     https://api.airtable.com/v0/app1f3lv9mx7L5xnY/Labs Project Tracking Staging?${fields}&
