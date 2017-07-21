@@ -11,10 +11,11 @@ const router = express.Router();
 router.get('/', (req, res) => {
   const fields = querystring.stringify({fields: whitelisted_fields});
   const url = `
-    https://api.airtable.com/v0/app1f3lv9mx7L5xnY/Labs Project Tracking Staging?${fields}&
+    https://api.airtable.com/v0/app1f3lv9mx7L5xnY/Labs Project Tracking?${fields}&
     view=All Projects&api_key=${process.env.AIRTABLE_API_KEY}
   `;
 
+  console.log(url);
   request({ url, json: true }, (err, response, body) => {
     const newArray = body.records.map(obj => obj.fields);
 
