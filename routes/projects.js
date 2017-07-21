@@ -2,12 +2,13 @@ const express = require('express');
 const request = require('request');
 const querystring = require('querystring');
 const slug = require('slug');
+const whitelisted_fields = 
+  process.env.WHITELISTED_FIELDS.split(',') ||
+  ['customer','problem_statement','project_id','project_name','project_types','short_description','strategic_objectives'];
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  const whitelisted_fields = 
-    ['customer','problem_statement','project_id','project_name','project_types','short_description','strategic_objectives'];
   const fields = querystring.stringify({fields: whitelisted_fields});
   const url = `
     https://api.airtable.com/v0/app1f3lv9mx7L5xnY/Labs Project Tracking Staging?${fields}&
