@@ -93,5 +93,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-  console.log('Capital Planning API running on port ' + bind)
+  console.log('Labs Ideas API running on port ' + bind)
 }
