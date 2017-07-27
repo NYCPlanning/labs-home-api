@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   const whitelisted_fields =
-    ['customer', 'problem_statement', 'project_id', 'project_name', 'tags', 'short_description', 'strategic_objectives'];
+    ['customer', 'problem_statement', 'project_id', 'project_name', 'tags', 'short_description', 'long_description', 'strategic_objectives'];
   const fields = querystring.stringify({ fields: whitelisted_fields });
   const url = `https://api.airtable.com/v0/app1f3lv9mx7L5xnY/Labs Project Tracking?${fields}&view=Vetted Projects&api_key=${process.env.AIRTABLE_API_KEY}`;
 
