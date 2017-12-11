@@ -13,8 +13,6 @@ router.get('/', (req, res) => {
   request({ url, json: true }, (err, response, body) => {
     const newArray = body.records.map(obj => obj.fields);
 
-    console.log(newArray);
-
     newArray.forEach((project) => {
       const d = project;
       d.slug = slug(d.name, { lower: true });

@@ -25,4 +25,15 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/:id', ({ params: { id } }, res) => {
+  const url = `https://api.airtable.com/v0/app1f3lv9mx7L5xnY/Labs Project Tracking/${id}?api_key=${process.env.AIRTABLE_API_KEY}`;
+
+  console.log(`Fetching ${url}`); // eslint-disable-line
+
+  request({ url, json: true }, (err, response, { fields }) => {
+    const { customer, problem_statement, project_id, project_name, tags, short_description, long_description, strategic_objectives } = fields;
+    res.send({ customer, problem_statement, project_id, project_name, tags, short_description, long_description, strategic_objectives });
+  });
+});
+
 module.exports = router;
