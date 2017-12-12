@@ -11,7 +11,8 @@ router.get('/', (req, res) => {
   console.log(`Fetching ${url}`); // eslint-disable-line
 
   request({ url, json: true }, (err, response, body) => {
-    const newArray = body.records.map(obj => obj.fields);
+    let newArray = body.records.map(obj => obj.fields);
+    newArray = newArray.filter(d => d.name);
 
     newArray.forEach((project) => {
       const d = project;
