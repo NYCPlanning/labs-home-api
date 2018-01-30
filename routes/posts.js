@@ -15,6 +15,8 @@ router.get('/', (req, res) => {
       return newItem;
     });
 
+    rss.items = rss.items.slice(0,4)
+
     res.json(rss);
   });
 });
