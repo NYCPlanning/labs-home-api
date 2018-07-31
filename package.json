@@ -13,12 +13,12 @@
     "dotenv": "^4.0.0",
     "express": "^4.13.4",
     "request": "^2.79.0",
-    "rss-to-json": "^1.0.3",
+    "rss-to-json": "^1.0.4",
     "slug": "^0.9.1",
     "underscore": "^1.8.3"
   },
   "engines": {
-    "node": "7.4.0",
+    "node": "8.11.3",
     "npm": "4.0.5"
   },
   "devDependencies": {
