@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   Feed.load('https://medium.com/feed/nycplanninglabs?truncated=true', (err, rss) => {
-    console.log(rss);
     rss.items.map((item) => {
       const $ = cheerio.load(item.description);
       const parsedDescription = $('.medium-feed-snippet').text();
@@ -18,7 +17,7 @@ router.get('/', (req, res) => {
       return newItem;
     });
 
-    rss.items = rss.items.slice(0,4)
+    rss.items = rss.items.slice(0, 4);
 
     res.json(rss);
   });

@@ -1,6 +1,5 @@
 const express = require('express');
 const request = require('request');
-const querystring = require('querystring');
 const slug = require('slug');
 
 const router = express.Router();

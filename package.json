@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
-    "lint": "eslint -c .eslintrc lib"
+    "lint": "./node_modules/.bin/eslint **/*.js"
   },
   "license": "ISC",
   "dependencies": {
