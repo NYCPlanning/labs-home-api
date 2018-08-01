@@ -4,7 +4,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
-    "lint": "./node_modules/.bin/eslint **/*.js"
+    "lint": "./node_modules/.bin/eslint **/*.js",
+    "test": "NODE_ENV=test node ./node_modules/mocha/bin/mocha ./test/**/*.js --exit"
   },
   "license": "ISC",
   "dependencies": {
@@ -23,9 +24,15 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "chai-things": "^0.2.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-loader": "^1.6.1",
-    "eslint-plugin-import": "^2.6.1"
+    "eslint-plugin-import": "^2.6.1",
+    "glob": "^7.1.2",
+    "mocha": "^5.2.0",
+    "nock": "^9.4.4"
   }
 }
