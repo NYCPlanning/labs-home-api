@@ -15,7 +15,7 @@ nock('https://api.airtable.com')
   .reply(200, airtableResponse);
 
 describe('GET /projects', () => {
-  it('should respond only with projects that match the specified CD', (done) => {
+  it('should respond with valid projects JSON', (done) => {
     chai.request(server)
       .get('/projects')
       .end((err, res) => {
