@@ -40,7 +40,7 @@ jobs:
           name: Deployment
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              git remote add dokku dokku@planninglabs.nyc:labs-api && git push dokku master
+              git remote add dokku dokku@planninglabs.nyc:home-api && git push dokku master
             elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              git remote add dokku dokku@planninglabs.nyc:labs-api-staging && git push dokku develop:master
+              git remote add dokku dokku@planninglabs.nyc:home-api-staging && git push dokku develop:master
             fi
