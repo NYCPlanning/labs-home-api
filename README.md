@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/NYCPlanning/labs-home-api/tree/develop.svg?style=svg)](https://circleci.com/gh/NYCPlanning/labs-home-api/tree/develop)
+
 # labs-home-api
 An express.js api that delivers project data from Airtable and blog post data from Medium for consumption in planninglabs.nyc
 
