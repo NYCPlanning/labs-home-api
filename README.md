@@ -1,5 +1,5 @@
-# labs-ideas-api
-An express.js api that delivers project-related data from airtable for consumption in ideas.planninglabs.nyc
+# labs-home-api
+An express.js api that delivers project data from Airtable and blog post data from Medium for consumption in planninglabs.nyc
 
 ## Development Environment
 
@@ -19,7 +19,7 @@ An express.js api that delivers project-related data from airtable for consumpti
   ```
   npm start
   ```
-  
+
 ## Routes
 
 - `/projects/pipeline.json` - gets projects who's status includes "Pipeline"
