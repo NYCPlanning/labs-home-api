@@ -9,6 +9,7 @@
   },
   "license": "ISC",
   "dependencies": {
+    "@octokit/graphql": "^1.0.0",
     "@octokit/rest": "^16.1.0",
     "body-parser": "^1.15.2",
     "cheerio": "^1.0.0-rc.2",
