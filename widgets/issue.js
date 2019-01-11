@@ -5,14 +5,33 @@ octokit.authenticate({
   token: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
 });
 
-const issueWidget = id => new Promise(async (resolve) => {
-  const issues = await octokit.issues.listForRepo({
-    owner: 'nycplanning',
-    repo: id,
-    labels: 'bug',
-  });
 
-  resolve(issues);
+// Given a repo and label, returns object with count of type of label
+const issueCount = (repo, labels) => octokit.issues.listForRepo({
+  owner: 'nycplanning',
+  repo,
+  labels,
+})
+  .then(({ data }) => data.length);
+
+const issuesWidget = id => new Promise(async (resolve) => {
+  const labels = ['bug', 'Easy Win'];
+
+  const labelPromises = labels.map(label => issueCount(id, label));
+  const issues = await Promise.all(labelPromises)
+    .then((counts) => {
+      const countResponse = {}; // master, develop
+      counts.forEach((count, i) => {
+        countResponse[labels[i]] = count;
+      });
+      return countResponse;
+    })
+    .catch(() => null);
+
+  resolve({
+    id: 'issues',
+    issues,
+  });
 });
 
-module.exports = issueWidget;
+module.exports = issuesWidget;

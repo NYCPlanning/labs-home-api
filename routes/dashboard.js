@@ -9,7 +9,7 @@ const graphql = require('@octokit/graphql');
 
 const developMasterSyncWidget = require('../widgets/develop-master-sync');
 
-const issueWidget = require('../widgets/issue');
+const issuesWidget = require('../widgets/issue');
 
 
 const router = express.Router();
@@ -72,7 +72,7 @@ router.get('/repos/:id', (req, res) => {
 
   const promises = [
     developMasterSyncWidget(id),
-    issueWidget(id),
+    issuesWidget(id),
   ];
 
   Promise.all(promises)
