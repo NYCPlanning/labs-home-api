@@ -3,9 +3,6 @@ const request = require('request');
 const mapObj = require('map-obj');
 const camelCase = require('camelcase');
 const kebabCase = require('kebab-case');
-const fetch = require('node-fetch');
-const octokit = require('@octokit/rest')();
-const graphql = require('@octokit/graphql');
 
 const developMasterSyncWidget = require('../widgets/develop-master-sync');
 
@@ -87,8 +84,7 @@ router.get('/repos/:id', (req, res) => {
             },
           });
         })
-        .catch((err) => {
-          console.log('CAUGHT IN ALL');
+        .catch(() => {
         });
 });
 
