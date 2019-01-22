@@ -5,7 +5,7 @@ octokit.authenticate({
   token: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
 });
 
-// Given a repo and label, returns object with count of type of label
+// Given a repo, returns object with count of OPEN pull requests
 const pullRequestCount = repo => octokit.pulls.list({
   owner: 'nycplanning',
   repo,
@@ -17,8 +17,7 @@ const pullRequestWidget = id => new Promise(async (resolve) => {
   const pullRequests = await Promise.all([
     pullRequestCount(id),
   ])
-      // .then(([id]) => id,
-      .catch(() => null);
+  .catch(() => null);
 
   resolve({
     id: 'pull-requests',
