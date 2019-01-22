@@ -20,7 +20,7 @@ const issuesWidget = id => new Promise(async (resolve) => {
   const labelPromises = labels.map(label => issueCount(id, label));
   const issues = await Promise.all(labelPromises)
     .then((counts) => {
-      const countResponse = {}; // master, develop
+      const countResponse = {};
       counts.forEach((count, i) => {
         countResponse[labels[i]] = count;
       });
