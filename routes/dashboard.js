@@ -28,8 +28,6 @@ router.get('/projects', (req, res) => {
     &api_key=${process.env.AIRTABLE_API_KEY}
   `.replace(/\s\s+/g, '');
 
-  console.log(`Fetching ${url}`); // eslint-disable-line
-
   request({ url, json: true }, (err, response, body) => {
     if (!err) {
       if (body.error) {
