@@ -14,10 +14,7 @@ const pullRequestCount = repo => octokit.pulls.list({
   .then(({ data }) => data.length);
 
 const pullRequestWidget = id => new Promise(async (resolve) => {
-  const pullRequests = await Promise.all([
-    pullRequestCount(id),
-  ])
-  .catch(() => null);
+  const pullRequests = await pullRequestCount(id);
 
   resolve({
     id: 'pull-requests',
