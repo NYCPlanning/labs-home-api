@@ -85,7 +85,6 @@ router.get('/repos/:id', (req, res) => {
           });
         })
         .catch(() => {
-          console.log('CAUGHT IN ALL');
         });
 });
 
