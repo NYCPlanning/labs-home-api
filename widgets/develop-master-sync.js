@@ -1,14 +1,4 @@
-const octokit = require('@octokit/rest')();
-const dotenv = require('dotenv');
-
-dotenv.load();
-
-octokit.authenticate({
-  type: 'oauth',
-  token: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
-});
-
-const compareCommits = (repo, base, head) => octokit.repos.compareCommits({
+const compareCommits = (repo, base, head, octokit) => octokit.repos.compareCommits({
   owner: 'nycplanning',
   repo,
   base,
@@ -23,10 +13,10 @@ const compareCommits = (repo, base, head) => octokit.repos.compareCommits({
     };
   });
 
-const developMasterSync = id => new Promise(async (resolve) => {
+const developMasterSync = (id, octokit) => new Promise(async (resolve) => {
   const attributes = await Promise.all([
-    compareCommits(id, 'develop', 'master'),
-    compareCommits(id, 'master', 'develop'),
+    compareCommits(id, 'develop', 'master', octokit),
+    compareCommits(id, 'master', 'develop', octokit),
   ])
     .then(([master, develop]) => ({
       master,

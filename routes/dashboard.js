@@ -3,6 +3,7 @@ const request = require('request');
 const mapObj = require('map-obj');
 const camelCase = require('camelcase');
 const kebabCase = require('kebab-case');
+const octokit = require('@octokit/rest')();
 
 const developMasterSyncWidget = require('../widgets/develop-master-sync');
 
@@ -12,7 +13,7 @@ const router = express.Router();
 router.get('/projects', (req, res) => {
   // product, status, type of project, labs assessment, last engagement, repos, staging url, production url
   const url = `
-    https://api.airtable.com/v0/app96dxh8etNgmxsm/Products-Existing%20and%20New\
+    https://api.airtable.com/v0/app96dxh8etNgmxsm/Labs%20Products-Existing%20and%20New\
     ?fields[]=Product\
     &fields[]=Status\
     &fields[]=Type of Project\
@@ -63,10 +64,14 @@ router.get('/projects', (req, res) => {
 });
 
 router.get('/repos/:id', (req, res) => {
+  octokit.authenticate({
+    type: 'oauth',
+    token: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
+  });
   const { id } = req.params;
 
   const promises = [
-    developMasterSyncWidget(id),
+    developMasterSyncWidget(id, octokit),
   ];
 
   Promise.all(promises)
