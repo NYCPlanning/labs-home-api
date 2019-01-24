@@ -1,4 +1,7 @@
 const octokit = require('@octokit/rest')();
+const dotenv = require('dotenv');
+
+dotenv.load();
 
 octokit.authenticate({
   type: 'oauth',

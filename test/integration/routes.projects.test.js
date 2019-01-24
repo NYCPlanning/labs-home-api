@@ -11,7 +11,7 @@ const server = require('../../app');
 const airtableResponse = require('../airtable-response');
 
 nock('https://api.airtable.com')
-  .get('/v0/app1f3lv9mx7L5xnY/Labs%20Live%20Projects?view=Public&api_key=undefined')
+  .get(`/v0/app1f3lv9mx7L5xnY/Labs%20Live%20Projects?view=Public&api_key=${process.env.AIRTABLE_API_KEY}`)
   .reply(200, airtableResponse);
 
 describe('GET /projects', () => {
