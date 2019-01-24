@@ -18,6 +18,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.13.4",
     "kebab-case": "^1.0.0",
+    "map-obj": "^3.0.0",
     "node-fetch": "^2.3.0",
     "request": "^2.79.0",
     "rss-to-json": "^1.0.4",
