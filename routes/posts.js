@@ -5,7 +5,7 @@ const cheerio = require('cheerio');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  Feed.load('https://medium.com/feed/nycplanninglabs?truncated=true', (err, rss) => {
+  Feed.load('https://medium.com/feed/nyc-planning-digital/tagged/NYC%20Planning%20Labs?truncated=true', (err, rss) => {
     rss.items.map((item) => {
       const $ = cheerio.load(item.description);
       const parsedDescription = $('.medium-feed-snippet').text();
