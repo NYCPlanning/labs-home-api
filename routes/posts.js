@@ -1,26 +1,44 @@
 const express = require('express');
-const Feed = require('rss-to-json');
+const fetch = require('node-fetch');
 const cheerio = require('cheerio');
+const moment = require('moment');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  Feed.load('https://medium.com/feed/nyc-planning-digital/tagged/NYC%20Planning%20Labs?truncated=true', (err, rss) => {
-    rss.items.map((item) => {
-      const $ = cheerio.load(item.description);
-      const parsedDescription = $('.medium-feed-snippet').text();
-      const parsedImage = $('.medium-feed-image img').attr('src');
+router.get('/', async (req, res) => {
+  // scrape the page https://medium.com/nyc-planning-digital/tagged/NYC Planning Labs for posts
 
-      const newItem = item;
-      newItem.description = parsedDescription;
-      newItem.image = parsedImage;
-      return newItem;
+  const html = await fetch('https://medium.com/nyc-planning-digital/tagged/NYC%20Planning%20Labs')
+    .then(d => d.text());
+
+  const $ = cheerio.load(html);
+  const items = [];
+
+  $('.streamItem').each((i, streamItem) => {
+    const title = $(streamItem).find('h3').text();
+
+    let description = $(streamItem).find('h4').text();
+    if (description === '') description = $(streamItem).find('p').text();
+
+    const link = $(streamItem).find('a').eq(3).attr('href');
+    const url = link;
+
+    const createdDisplay = $(streamItem).find('time').text();
+    const created = moment(createdDisplay, 'MMM D, YYYY').format('x');
+
+    const image = $(streamItem).find('img').eq(1).attr('src');
+
+    items.push({
+      title,
+      description,
+      link,
+      url,
+      created,
+      image,
     });
-
-    rss.items = rss.items.slice(0, 4);
-
-    res.json(rss);
   });
+
+  res.json({ items });
 });
 
 module.exports = router;
