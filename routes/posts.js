@@ -15,6 +15,8 @@ router.get('/', async (req, res) => {
   const items = [];
 
   $('.streamItem').each((i, streamItem) => {
+    if (i === 4) return false; // limit to 4 results
+
     const title = $(streamItem).find('h3').text();
 
     let description = $(streamItem).find('h4').text();
@@ -36,6 +38,8 @@ router.get('/', async (req, res) => {
       created,
       image,
     });
+
+    return true;
   });
 
   res.json({ items });
