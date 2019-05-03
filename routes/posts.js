@@ -5,7 +5,15 @@ const cheerio = require('cheerio');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  Feed.load('https://medium.com/feed/tag/nyc-planning-labs', (err, rss) => {
+  const { tag } = req.query;
+  let feedUrl;
+  if (tag) {
+    feedUrl = `https://medium.com/feed/nyc-planning-digital/tagged/${tag}?truncated=true`;
+  } else {
+    feedUrl = 'https://medium.com/feed/nyc-planning-digital?truncated=true';
+  }
+
+  Feed.load(feedUrl, (err, rss) => {
     rss.items.map((item) => {
       const $ = cheerio.load(item.description);
       const parsedDescription = $('.medium-feed-snippet').text();
