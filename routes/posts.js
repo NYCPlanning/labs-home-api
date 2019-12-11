@@ -5,7 +5,7 @@ const cheerio = require('cheerio');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  const { tag } = req.query;
+  const { tag, limit = 4 } = req.query;
   let feedUrl;
   if (tag) {
     feedUrl = `https://medium.com/feed/nyc-planning-digital/tagged/${tag}?truncated=true`;
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
       return newItem;
     });
 
-    rss.items = rss.items.slice(0, 4);
+    rss.items = rss.items.slice(0, limit);
 
     res.json(rss);
   });
