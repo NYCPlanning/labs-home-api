@@ -21,7 +21,7 @@
     "googleapis": "^27.0.0",
     "kebab-case": "^1.0.0",
     "map-obj": "^3.0.0",
-    "node-fetch": "^2.3.0",
+    "node-fetch": "^2.6.1",
     "nodemon": "^1.19.0",
     "request": "^2.79.0",
     "rss-to-json": "^1.0.4",
